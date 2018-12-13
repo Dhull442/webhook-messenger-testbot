@@ -16,6 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/Dhull442/webhook-messenger-testbot.git"
   },
+  "start":"node index.js",
   "keywords": [
     "messenger"
   ],
