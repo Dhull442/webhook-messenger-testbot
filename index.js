@@ -1,6 +1,7 @@
 'use script';
 const PAGE_ACCESS_TOKEN = "EAAKY4YZCFttMBACuOZBg0u7LM1QZCM6QhHug1aPAU7lzop04xfaIN0LgSbVZCK1lXLCNmLKQVy1is80xUk5IMlVcA8jou1WGGQtMfsM5DSWfZBUZA6lfpO5NU6XJa8VRb1ukAtQIc9zHTZBaNE4CLYZChluTGqnWgrtc6zjLPcxZCVHlDmz1iexUS";
 const
+    request = require('request'),
     express = require('express'),
     bodyParser = require('body-parser'),
     app = express().use(bodyParser.json());
@@ -18,8 +19,14 @@ app.post('/webhook',(req,res)=>{
 
             let sender_psid = webhook_event.sender.id;
             console.log('sender PSID: '+sender_psid);
-        }
-        );
+            if(webhook_event.message)
+            {
+                handleMessage(sender_psid,webhook_event.message);
+            }
+            else if(webhook_event.postback){
+                handlePostback(sender_psid,webhook_event.postback);
+            }
+        });
         res.status(200).send('EVENT_RECEIVED');
     }
     else
@@ -46,6 +53,42 @@ app.get('/webhook',(req,res)=> {
     }
 });
 
-function handleMessage(sender_psid, received_message){}
+function handleMessage(sender_psid, received_message){
+    let response;
+
+    if(received_message.text){
+        response = {
+            "text": `You sent the message: "${received_message.text}"`
+        }
+    }
+    else if(received_message.attachments){
+        let attachment_url = received_message.attachments[0].payload.url;
+        response = {
+            "attachment":{
+                "type": "template",
+                "payload":{
+                    "template_type": "generic",
+                    "elements": [{
+                        "title": "Is this the right picture?",
+                        "subtitle": "Tap a button to answer.",
+                        "image_url": attachment_url,
+                        "buttons": [{
+                            "type": "postback",
+                            "title": "Yes!",
+                            "payload": "yes",
+                        },
+                        {
+                            "type": "postback",
+                            "title": "NO!",
+                            "payload": "no",
+                        }
+                        ],
+                    }]
+                }
+            }
+        }
+    }
+    callSendAPI(sender_psid,response);
+}
 function handlePostback(sender_psid,received_message){}
 function callSendAPI(sender_psid,received_message){}
