@@ -1,5 +1,5 @@
 'use script';
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const PAGE_ACCESS_TOKEN = "EAAKY4YZCFttMBACuOZBg0u7LM1QZCM6QhHug1aPAU7lzop04xfaIN0LgSbVZCK1lXLCNmLKQVy1is80xUk5IMlVcA8jou1WGGQtMfsM5DSWfZBUZA6lfpO5NU6XJa8VRb1ukAtQIc9zHTZBaNE4CLYZChluTGqnWgrtc6zjLPcxZCVHlDmz1iexUS"
 const
     express = require('express'),
     bodyParser = require('body-parser'),
