@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+        "start":"node index.js"
   },
   "author": "Saksham Dhull",
   "license": "ISC",
@@ -16,7 +16,6 @@
     "type": "git",
     "url": "git+https://github.com/Dhull442/webhook-messenger-testbot.git"
   },
-  "start":"node index.js",
   "keywords": [
     "messenger"
   ],
