@@ -5,7 +5,7 @@ const
     bodyParser = require('body-parser'),
     app = express().use(bodyParser.json());
 
-app.listen(process.env.PORT || 5000, () => console.log('webhook is listening'));
+app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
 app.post('/webhook',(req,res)=>{
     let body = req.body;
@@ -26,7 +26,7 @@ app.post('/webhook',(req,res)=>{
 });
 
 app.get('/webhook',(req,res)=> {
-    let VERIFY_TOKEN = "randomverifystring"
+    let VERIFY_TOKEN = "devops"
     let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
     let challenge = req.query['hub.challenge'];
