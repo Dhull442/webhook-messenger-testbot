@@ -48,6 +48,7 @@ app.get('/webhook',(req,res)=> {
         }
         else{
             res.sendStatus(403);
+            console.log('VERIFICATION FAILED');
         }
     }
 });
